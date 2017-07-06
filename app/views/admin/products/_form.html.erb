@@ -1,0 +1,8 @@
+<%= simple_form_for [:admin, @product] do |p| %>
+  <%= p.input :title %>
+  <%= p.input :description %>
+  <%= p.input :price %>
+  <%= p.input :quantity %>
+  <%= p.input :image %>
+  <%= p.submit "Submit", :disable_with => "Submitting..."%>
+<% end %>

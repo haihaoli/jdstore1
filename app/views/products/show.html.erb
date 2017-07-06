@@ -1,0 +1,20 @@
+<div class="col-md-6">
+  <% if @product.image.present? %>
+    <%= image_tag(@product.image.url, class: "thumbnail")%>
+  <% else %>
+    <%= image_tag("https://ws3.sinaimg.cn/large/006tNbRwgy1fh9u5gz7lkj30b30b4mxh.jpg", class: "thumbnail")%>
+  <% end %>
+</div>
+
+<div class="col-md-6">
+  <h2><%= @product.title %></h2>
+  <div>
+    <p>Description:<%= @product.description %></p>
+  </div>
+  <p>Price: ¥<%= @product.price %></p>
+  <p>Quantity: <%= @product.quantity %></p>
+</div>
+
+<div class="pull-right pull-button">
+  <%= link_to("加入购物车", "#", :class => "btn btn-lg btn-danger") %>
+</div>
