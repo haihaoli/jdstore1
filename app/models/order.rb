@@ -23,7 +23,7 @@ class Order < ApplicationRecord
     state :shipping
     state :shipped
     state :order_cancelled
-    state :good_returned
+    state :good_retured
 
     event :make_payment, after_commit: :pay! do
       transitions from: :order_placed, to: :paid
