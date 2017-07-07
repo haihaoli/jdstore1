@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     resources :products
   end
 
+  namespace :account do
+    resources :orders
+  end
+
   resources :products do
     member do
       post :add_to_cart
@@ -19,9 +23,19 @@ Rails.application.routes.draw do
   resources :carts do
     member do
       delete :cart_clean
+      post :order_confirm
     end
   end
 
   resources :cart_items
+
+  resources :orders do
+    member do
+      post :alipay
+      post :wechan
+    end
+  end
+
+  resources :productlists
 
 end

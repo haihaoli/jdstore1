@@ -1,0 +1,50 @@
+<h2>订单明细</h2>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Product_Title</th>
+    <th>Product_Price</th>
+    <th>Product_Quantity</th>
+  </tr>
+  <% @productlists.each do |pl| %>
+  <tr>
+    <td><%= pl.product_name %></td>
+    <td><%= pl.product_price %></td>
+    <td><%= pl.quantity %></td>
+  </tr>
+  <% end %>
+</table>
+
+<div class="pull-right">
+  总计 <%= @order.total %> RMB
+</div>
+
+<h2>寄送资讯</h2>
+
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    订购人
+  </div>
+  <div class="panel-body">
+    <%= @order.billing_name %> - <%= @order.billing_address %>
+  </div>
+</div>
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    收件人
+  </div>
+  <div class="panel-body">
+    <%= @order.shipping_name %> - <%= @order.shipping_address %>
+  </div>
+</div>
+
+<% if @order.is_paid == false %>
+  <div class="pull-right">
+    <%= link_to("以支付宝付款", alipay_order_path(@order.token), method: :post, :class => "btn btn-danger") %>
+    <%= link_to("以微信付款", wechan_order_path(@order.token), method: :post, :class => "btn btn-danger") %>
+  </div>
+<% else %>
+  <div class="text-center">
+    该笔订单已经支付
+  </div>
+<% end %>

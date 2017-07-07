@@ -1,0 +1,49 @@
+<h2>购物明细</h2>
+<table class="table">
+  <tr>
+    <th>Product Title</th>
+    <th>Product Image</th>
+    <th>Product Price</th>
+    <th>Product Quantity</th>
+  </tr>
+  <% @cart.cart_items.each do |cart_item| %>
+  <tr>
+    <td>
+      <%= link_to product_path(cart_item.product) do %>
+        <%= cart_item.product.title %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to product_path(cart_item.product) do %>
+        <% if cart_item.product.image.present? %>
+          <%= image_tag(cart_item.product.image.thumb.url, :class => "thumbnail") %>
+        <% else %>
+          <%= image_tag("https://ws1.sinaimg.cn/large/006tNc79gy1fha84kunf7j305k05kaa2.jpg", :class => "thumbnail") %>
+        <% end %>
+      <% end %>
+    </td>
+    <td><%= cart_item.product.price %></td>
+    <td><%= cart_item.quantity %></td>
+  </tr>
+  <% end %>
+</table>
+
+<div class="pull-right cleanfix">
+  总计 <%= current_cart.total_price %> RMB
+</div>
+
+<br>
+<hr>
+
+<h2>订单资讯</h2>
+
+
+<%= simple_form_for @order do |f| %>
+  <legend>订购人</legend>
+  <%= f.input :billing_name %>
+  <%= f.input :billing_address %>
+  <legend>收货人</legend>
+  <%= f.input :shipping_name %>
+  <%= f.input :shipping_address %>
+  <%= f.submit "生成订单", :class => "btn btn-danger pull-right" , :disable_with => "Submitting..." %>
+<% end %>

@@ -16,4 +16,9 @@ class CartsController < ApplicationController
     flash[:warning] = "您已经清空购物车"
   end
 
+  def order_confirm
+    @order = Order.new
+    @cart = current_cart
+  end
+
 end
