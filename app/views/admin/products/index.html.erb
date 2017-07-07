@@ -17,7 +17,10 @@
     <td>
       <% if product.image.present? %>
         <%= image_tag(product.image.thumb.url)%>
+      <% else %>
+        <%= image_tag("https://ws1.sinaimg.cn/large/006tNc79gy1fha84kunf7j305k05kaa2.jpg", class: "thumbnail")%>
       <% end %>
+
     </td>
     <td><%= product.title %></td>
     <td>¥<%= product.price %></td>

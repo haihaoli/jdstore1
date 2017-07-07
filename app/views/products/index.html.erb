@@ -3,16 +3,26 @@
 <% @products.each do |p| %>
   <div class="col-md-3 product">
     <p>
-      <% if p.image.present? %>
-        <a href="<%= product_path(p) %>">
+      <a href="<%= product_path(p) %>">
+        <% if p.image.present? %>
           <%= image_tag(p.image.medium.url, :class => "thumbnail")%>
-        </a>
-      <% else %>
-        <%= image_tag("https://ws3.sinaimg.cn/large/006tNbRwgy1fh9u5gz7lkj30b30b4mxh.jpg", class: "thumbnail")%>
-      <% end %>
+        <% else %>
+          <%= image_tag("https://ws3.sinaimg.cn/large/006tNbRwgy1fh9u5gz7lkj30b30b4mxh.jpg", class: "thumbnail")%>
+        <% end %>
+      </a>
     </p>
     <p><%= link_to p.title, product_path(p) %></p>
     <p>Price: ¥<%= p.price %></p>
     <p>Quantity: <%= p.quantity %></p>
+    <p>
+      <div class="pull-right clearfix">
+        <% if p.quantity > 0 %>
+          <%= link_to("加入购物车", add_to_cart_product_path(p), :method => :post, :class => "btn btn-danger") %>
+        <% else %>
+          商品已售空
+        <% end %>
+      </div>
+    </p>
+
   </div>
 <% end %>
