@@ -1,0 +1,22 @@
+<h1>管理员订单列表</h1>
+
+<table class="table">
+  <tr>
+    <th>Order_id</th>
+    <th>Order_TotalPrice</th>
+    <th>Order_created_at</th>
+    <th>Order_state</th>
+  </tr>
+  <% @orders.each do |order| %>
+  <tr>
+    <td>
+      <%= link_to admin_order_path(order.token) do %>
+        <%= order.id %>
+      <% end %>
+    </td>
+    <td><%= order.total %></td>
+    <td><%= order.created_at %></td>
+    <td><%= order.aasm_state %></td>
+  </tr>
+  <% end %>
+</table>

@@ -1,10 +1,9 @@
-<h2>订单明细</h2>
+<h2>
+  订单明细(<%= render_order_paid_state(@order)%>)
 
-<div class="pull-left">
- <% if @order.order_placed? || @order.paid? %>
-   <%= link_to("申请取消订单", apply_to_cancel_order_path(@order), method: :post, class: "btn  btn-info") %>
- <% end %>
-</div>
+</h2>
+
+<%= render "admin/orders/state_option", order: @order %>
 
 <table class="table table-bordered">
   <tr>
@@ -43,14 +42,3 @@
     <%= @order.shipping_name %> - <%= @order.shipping_address %>
   </div>
 </div>
-
-<% if @order.is_paid == false %>
-  <div class="pull-right">
-    <%= link_to("以支付宝付款", alipay_order_path(@order.token), method: :post, :class => "btn btn-danger") %>
-    <%= link_to("以微信付款", wechan_order_path(@order.token), method: :post, :class => "btn btn-danger") %>
-  </div>
-<% else %>
-  <div class="text-center">
-    该笔订单已经支付
-  </div>
-<% end %>

@@ -1,0 +1,43 @@
+<h2>订单明细</h2>
+<%= link_to("订单链接", order_url(@order.token)) %>
+
+<table>
+  <tr>
+    <th>商品明细</th>
+    <th>单价</th>
+    <th>数量</th>
+    <th>小记</th>
+  </tr>
+  <% @productlists.each do |pl| %>
+  <tr>
+    <td><%= pl.product_name %></td>
+    <td><%= pl.product_price %></td>
+    <td><%= pl.quantity %></td>
+    <td><%= pl.product_price * pl.quantity %></td>
+  </tr>
+  <% end %>
+</table>
+
+<div class="pull-right">
+  总计 <%= @order.total %> CNY
+</div>
+
+<hr>
+
+<h2>寄送资讯</h2>
+
+
+<table>
+  <tr>
+    <td>订购人</td>
+  </tr>
+    <tr>
+      <td><%= @order.billing_name %> - <%= @order.billing_address %></td>
+    </tr>
+  <tr>
+    <td>收件人</td>
+  </tr>
+  <tr>
+    <td><%= @order.shipping_name %> - <%= @order.shipping_address %></td>
+  </tr>
+</table>
